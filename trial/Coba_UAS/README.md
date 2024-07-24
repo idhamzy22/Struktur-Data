@@ -9,7 +9,7 @@ Pastikan Anda telah menginstal:
 - MySQL Connector C++
 - Compiler C++ (misalnya g++)
 
-## Konfigurasi Database
+## Konfigurasi Database di Navicat
 
 1. Buat database `cpp_crud` di MySQL:
     ```sql
