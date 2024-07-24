@@ -46,12 +46,12 @@ Pastikan Anda telah menginstal:
 
 1. Kompilasi program:
     ```sh
-    g++ -o book_management book_management.cpp -lmysqlclient
+    g++ -o crud_simple crud.cc -lmysqlclient
     ```
 
 2. Jalankan program:
     ```sh
-    ./book_management
+    ./crud_simple
     ```
 
 ## Struktur Program
