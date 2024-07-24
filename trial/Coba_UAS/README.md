@@ -302,7 +302,7 @@ Pastikan Anda telah menginstal:
 ### Fungsi dan Deskripsi
 
 1. **Header Files dan Namespace**
-    ```sh
+    ```cpp
     #include <iostream>
     #include <mysql/mysql.h>
     #include <sstream>
@@ -319,7 +319,7 @@ Pastikan Anda telah menginstal:
     - `using namespace std;`: Menghindari penggunaan prefix std:: pada objek-objek standar.
 
 2. **Konstanta dan Koneksi Database**
-    ```sh
+    ```cpp
     const char* hostname = "127.0.0.1";
     const char* user = "root";
     const char* pass = "123";
@@ -332,7 +332,7 @@ Pastikan Anda telah menginstal:
     - Menyimpan informasi koneksi ke database MySQL: alamat server (`hostname`), nama pengguna (`user`), password (`pass`), nama database (`dbname`), port, dan konfigurasi lainnya.
 
 3. **Fungsi `connect_db()`**
-    ```sh
+    ```cpp
     MYSQL* connect_db() {
     MYSQL* conn = mysql_init(0);
     if (conn) {
@@ -344,9 +344,9 @@ Pastikan Anda telah menginstal:
         }
     } else {
         cerr << "mysql_init gagal" << endl;
-    }
+        }
     return conn;
-}
+    }
     ```    
 
     - `mysql_init(0)`: Inisialisasi objek koneksi MySQL.
@@ -354,7 +354,7 @@ Pastikan Anda telah menginstal:
     - Mengembalikan pointer ke objek koneksi jika berhasil, atau menampilkan pesan kesalahan jika gagal.
 
 4. **Fungsi Validasi**
-    ```sh
+    ```cpp
     bool is_valid_year(const string& year) {
     if (year.length() != 4) {
         return false;
@@ -362,26 +362,26 @@ Pastikan Anda telah menginstal:
     for (char c : year) {
         if (!isdigit(c)) {
             return false;
+            }
         }
-    }
     return true;
-}
+    }
 
-bool is_valid_pages(const string& pages) {
-    for (char c : pages) {
-        if (!isdigit(c)) {
-            return false;
+    bool is_valid_pages(const string& pages) {
+        for (char c : pages) {
+            if (!isdigit(c)) {
+                return false;
+            }
         }
+        return true;
     }
-    return true;
-}
     ```
 
     - `is_valid_year(const string& year)`: Memeriksa apakah string tahun terdiri dari 4 digit angka.
     - `is_valid_pages(const string& pages)`: Memeriksa apakah string jumlah halaman hanya berisi angka.
 
 5. **Fungsi `create_book()`**
-    ```sh
+    ```cpp
     void create_book(const string& title, const string& author, const string& publisher, const string& year, const string& genre, int pages) {
     if (!is_valid_year(year)) {
         cerr << "Year harus terdiri dari 4 digit angka." << endl;
@@ -395,10 +395,10 @@ bool is_valid_pages(const string& pages) {
             cerr << "INSERT gagal: " << mysql_error(conn) << endl;
         } else {
             cout << "Buku berhasil ditambahkan." << endl;
-        }
+            }
         mysql_close(conn);
+        }
     }
-}
     ```
 
     - Memeriksa validitas tahun sebelum melanjutkan.
@@ -406,7 +406,7 @@ bool is_valid_pages(const string& pages) {
     - Menjalankan query dan menampilkan hasilnya.
 
 6. **Fungsi `get_idham()`**
-    ```sh
+    ```cpp
     void get_idham() {
     MYSQL* conn = connect_db();
     if (conn) {
@@ -430,15 +430,15 @@ bool is_valid_pages(const string& pages) {
 
         mysql_free_result(res);
         mysql_close(conn);
+        }
     }
-}
     ```
 
     - Mengambil dan menampilkan semua data buku dari tabel `idham`.
     - Menampilkan hasil setiap baris dalam tabel.
 
 7. **Fungsi `update_book()`**
-    ```sh
+    ```cpp
     void update_book(int book_id, const string& title, const string& author, const string& publisher, const string& year, const string& genre, int pages) {
     if (!is_valid_year(year)) {
         cerr << "Year harus terdiri dari 4 digit angka." << endl;
@@ -455,15 +455,15 @@ bool is_valid_pages(const string& pages) {
             cout << "Buku berhasil diperbarui." << endl;
         }
         mysql_close(conn);
+        }
     }
-}
     ```
 
     - Memperbarui data buku berdasarkan ID buku yang diberikan.
     - Menggunakan `stringstream` untuk menyusun query SQL.
 
 8. **Fungsi `delete_book()`**
-    ```sh
+    ```cpp
     void delete_book(int book_id) {
     MYSQL* conn = connect_db();
     if (conn) {
@@ -475,14 +475,14 @@ bool is_valid_pages(const string& pages) {
             cout << "Buku berhasil dihapus." << endl;
         }
         mysql_close(conn);
+        }
     }
-}
     ```
 
     - Menghapus buku dari tabel `idham` berdasarkan ID buku yang diberikan.
 
 9. **Menu Admin dan User**
-    ```sh
+    ```cpp
     void admin_menu() {
     int choice;
     while (true) {
@@ -549,35 +549,35 @@ bool is_valid_pages(const string& pages) {
             break;
         } else {
             cout << "Pilihan tidak valid. Silakan coba lagi." << endl;
+            }
         }
     }
-}
 
-void user_menu() {
-    int choice;
-    while (true) {
-        cout << "\nMenu User:\n";
-        cout << "1. Tampilkan Semua Buku\n";
-        cout << "2. Keluar\n";
-        cout << "Masukkan pilihan: ";
-        cin >> choice;
+    void user_menu() {
+        int choice;
+        while (true) {
+            cout << "\nMenu User:\n";
+            cout << "1. Tampilkan Semua Buku\n";
+            cout << "2. Keluar\n";
+            cout << "Masukkan pilihan: ";
+            cin >> choice;
 
-        if (choice == 1) {
-            get_idham();
-        } else if (choice == 2) {
-            break;
-        } else {
-            cout << "Pilihan tidak valid. Silakan coba lagi." << endl;
+            if (choice == 1) {
+                get_idham();
+            } else if (choice == 2) {
+                break;
+            } else {
+                cout << "Pilihan tidak valid. Silakan coba lagi." << endl;
+            }
         }
     }
-}
     ```
 
     - `admin_menu()`: Menampilkan menu admin yang memungkinkan admin untuk menambah, menampilkan, memperbarui, atau menghapus buku. Admin dapat memasukkan data buku baru, memperbarui informasi buku, atau menghapus buku berdasarkan ID.
     - `user_menu()`: Menampilkan menu untuk pengguna biasa yang hanya memungkinkan untuk melihat daftar buku.
 
 10. **Fungsi `main()`**
-    ```sh
+    ```cpp
     int main() {
     int role;
     cout << "Masukkan peran Anda (1 untuk Admin, 2 untuk User): ";
@@ -592,7 +592,7 @@ void user_menu() {
     }
 
     return 0;
-}
+    }
     ```
 
     - Menanyakan peran pengguna (Admin atau User).
