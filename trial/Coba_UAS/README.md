@@ -282,6 +282,11 @@ Pastikan Anda telah menginstal:
     }
     ```
 
+2. Instal `libmysqlclient-dev`:
+    ```sh
+    apt-get install libmysqlclient-dev   
+    ```    
+
 2. Kompilasi program:
     ```sh
     g++ -o crud_simple crud.cc -lmysqlclient
