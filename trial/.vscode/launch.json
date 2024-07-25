@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/root/perkuliahan/Struktur-Data/uasSaya",
-      "program": "/root/perkuliahan/Struktur-Data/uasSaya/build/Debug/outDebug",
+      "cwd": "/root/perkuliahan/Struktur-Data/trial/Coba_UAS",
+      "program": "/root/perkuliahan/Struktur-Data/trial/Coba_UAS/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
