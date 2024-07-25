@@ -29,13 +29,13 @@ Pastikan Anda telah menginstal:
     USE cpp_crud;
 
     CREATE TABLE idham (
-        id INT AUTO_INCREMENT PRIMARY KEY,
+        id INT(11) AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(255),
         author VARCHAR(255),
         publisher VARCHAR(255),
         year CHAR(4),
         genre VARCHAR(255),
-        pages INT
+        pages INT(11)
     );
     ```
 
